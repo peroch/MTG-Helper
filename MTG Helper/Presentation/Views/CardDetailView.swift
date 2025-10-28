@@ -19,7 +19,7 @@ struct CardDetailView: View {
     var body: some View {
         VStack {
             if viewModel.isLoading {
-                ProgressView("Chargement...")
+                ProgressView("Loading...")
             } else if let card = viewModel.card {
                 ScrollView {
                     VStack(spacing: 16) {
@@ -35,17 +35,23 @@ struct CardDetailView: View {
                                         .cornerRadius(12)
                                         .shadow(radius: 6)
                                 case .failure:
-                                    Text("Image indisponible")
+                                    Text("Image unavailable")
                                 @unknown default:
                                     EmptyView()
                                 }
                             }
                             .frame(maxHeight: 400)
                         }
-                        
-                        Text(card.name)
-                            .font(.title)
-                            .bold()
+                            
+                        VStack(spacing: 8) {
+                            Text(card.name)
+                                .font(.title)
+                                .bold()
+                            
+                            if let manaCost = card.manaCost, !manaCost.isEmpty {
+                                ManaCostView(manaCost: manaCost, symbolSize: 20)
+                            }
+                        }
                         
                         if let oracleText = card.oracleText {
                             Text(oracleText)
@@ -53,12 +59,28 @@ struct CardDetailView: View {
                                 .multilineTextAlignment(.leading)
                         }
                         
+                        if !card.rulings.isEmpty {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Rulings")
+                                    .font(.headline)
+                                    .bold()
+                                
+                                ForEach(card.rulings, id: \.self) { ruling in
+                                    Text("• \(ruling)")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                        .multilineTextAlignment(.leading)
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        
                         Spacer()
                     }
                     .padding()
                 }
             } else if let error = viewModel.error {
-                Text("Erreur : \(error)")
+                Text("Error: \(error)")
                     .foregroundColor(.red)
             } else {
                 EmptyView()

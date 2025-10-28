@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct MTG_HelperApp: App {
@@ -13,5 +14,6 @@ struct MTG_HelperApp: App {
         WindowGroup {
             CoordinatorRootView()
         }
+        .modelContainer(for: [Deck.self])
     }
 }

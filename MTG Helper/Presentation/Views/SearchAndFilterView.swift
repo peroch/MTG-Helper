@@ -15,7 +15,7 @@ struct SearchAndFilterView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Recherche de cartes")
+            Text("Card Search")
                 .font(.title)
                 .bold()
             
@@ -23,7 +23,7 @@ struct SearchAndFilterView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
             
-            Button("Rechercher") {
+            Button("Search") {
                 if !query.isEmpty {
                     onSearch(query)
                     showResults = true

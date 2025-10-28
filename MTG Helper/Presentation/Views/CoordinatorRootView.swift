@@ -15,7 +15,7 @@ struct CoordinatorRootView: View {
         TabView {
             searchCoordinator.makeView()
                 .tabItem {
-                    Label("Recherche", systemImage: "magnifyingglass")
+                    Label("Search", systemImage: "magnifyingglass")
                 }
             
             decksCoordinator.makeView()

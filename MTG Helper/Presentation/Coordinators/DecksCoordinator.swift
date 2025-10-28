@@ -11,7 +11,7 @@ final class DecksCoordinator: ObservableObject {
     @Published var path: [Destination] = []
     
     enum Destination: Hashable {
-        case DeckDetail(id: String)
+        case deckDetail(id: UUID)
     }
 
     func makeView() -> some View {

@@ -14,6 +14,6 @@ struct MTG_HelperApp: App {
         WindowGroup {
             CoordinatorRootView()
         }
-        .modelContainer(for: [Deck.self])
+        .modelContainer(for: [Deck.self, DeckCard.self])
     }
 }

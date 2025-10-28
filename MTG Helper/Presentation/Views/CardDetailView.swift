@@ -59,6 +59,28 @@ struct CardDetailView: View {
                                 .multilineTextAlignment(.leading)
                         }
                         
+                        if !viewModel.decksContainingCard.isEmpty {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Present in Decks")
+                                    .font(.headline)
+                                    .bold()
+                                
+                                ForEach(viewModel.decksContainingCard) { deck in
+                                    HStack {
+                                        Text(deck.name)
+                                            .font(.body)
+                                        Spacer()
+                                        Text(deck.format.displayName)
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .padding(.vertical, 4)
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical)
+                        }
+                        
                         if !card.rulings.isEmpty {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Rulings")
@@ -88,6 +110,71 @@ struct CardDetailView: View {
         }
         .task {
             await viewModel.load(id: cardId)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    Task {
+                        await viewModel.loadAvailableDecks()
+                        viewModel.showDeckPicker = true
+                    }
+                }) {
+                    Label("Add to Deck", systemImage: "plus.circle")
+                }
+            }
+        }
+        .sheet(isPresented: $viewModel.showDeckPicker) {
+            DeckPickerView(
+                decks: viewModel.availableDecks,
+                onSelectDeck: { deck in
+                    Task {
+                        await viewModel.addToDeck(deck)
+                    }
+                }
+            )
+        }
+    }
+}
+
+struct DeckPickerView: View {
+    let decks: [Deck]
+    let onSelectDeck: (Deck) -> Void
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+        NavigationView {
+            List {
+                if decks.isEmpty {
+                    Text("No decks available. Create a deck first.")
+                        .foregroundColor(.secondary)
+                        .italic()
+                } else {
+                    ForEach(decks) { deck in
+                        Button(action: {
+                            onSelectDeck(deck)
+                            dismiss()
+                        }) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(deck.name)
+                                    .font(.headline)
+                                Text(deck.format.displayName)
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Select Deck")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 }

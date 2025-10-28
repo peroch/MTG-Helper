@@ -15,13 +15,13 @@ final class AppCoordinator: ObservableObject {
     }
 
     @Published var currentView: CurrentView = .searchEntry
-    let repository: CardRepository
+    let cardRepository: CardRepository
+    let deckRepository: DeckRepository
 
-    init(repository: CardRepository) {
-        self.repository = repository
+    init(cardRepository: CardRepository, deckRepository: DeckRepository) {
+        self.cardRepository = cardRepository
+        self.deckRepository = deckRepository
     }
-    
-    
 
     func start() -> some View {
         CoordinatorRootView()

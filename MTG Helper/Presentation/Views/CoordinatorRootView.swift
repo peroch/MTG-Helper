@@ -6,10 +6,34 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CoordinatorRootView: View {
-    @StateObject private var searchCoordinator = SearchCoordinator(repository: CardRepositoryImpl(api: ScryfallAPIClient()))
-    @StateObject private var decksCoordinator = DecksCoordinator()
+    @Environment(\.modelContext) private var modelContext
+    
+    var body: some View {
+        CoordinatorRootContentView(modelContext: modelContext)
+    }
+}
+
+struct CoordinatorRootContentView: View {
+    @StateObject private var searchCoordinator: SearchCoordinator
+    @StateObject private var decksCoordinator: DecksCoordinator
+    
+    init(modelContext: ModelContext) {
+        let cardRepository = CardRepositoryImpl(api: ScryfallAPIClient())
+        let deckRepository = DeckRepositoryImpl(modelContext: modelContext)
+        
+        _searchCoordinator = StateObject(wrappedValue: SearchCoordinator(
+            cardRepository: cardRepository,
+            deckRepository: deckRepository
+        ))
+        
+        _decksCoordinator = StateObject(wrappedValue: DecksCoordinator(
+            cardRepository: cardRepository,
+            deckRepository: deckRepository
+        ))
+    }
     
     var body: some View {
         TabView {

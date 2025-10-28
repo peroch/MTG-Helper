@@ -8,28 +8,35 @@
 import SwiftUI
 
 final class SearchCoordinator: ObservableObject {
-    private let repository: CardRepository
+    private let cardRepository: CardRepository
+    private let deckRepository: DeckRepository
     
     enum Destination: Hashable {
         case cardSearch(query: String)
         case cardDetail(id: String)
     }
     
-    init(repository: CardRepository) {
-        self.repository = repository
+    init(cardRepository: CardRepository, deckRepository: DeckRepository) {
+        self.cardRepository = cardRepository
+        self.deckRepository = deckRepository
     }
     
     func makeView() -> some View {
-        SearchCoordinatorView(repository: repository)
+        SearchCoordinatorView(
+            cardRepository: cardRepository,
+            deckRepository: deckRepository
+        )
     }
 }
 
 struct SearchCoordinatorView: View {
     @State private var path = NavigationPath()
-    private let repository: CardRepository
+    private let cardRepository: CardRepository
+    private let deckRepository: DeckRepository
     
-    init(repository: CardRepository) {
-        self.repository = repository
+    init(cardRepository: CardRepository, deckRepository: DeckRepository) {
+        self.cardRepository = cardRepository
+        self.deckRepository = deckRepository
     }
     
     var body: some View {
@@ -40,12 +47,17 @@ struct SearchCoordinatorView: View {
             .navigationDestination(for: SearchCoordinator.Destination.self) { destination in
                 switch destination {
                 case .cardSearch(let query):
-                    let vm = CardSearchViewModel(searchCards: SearchCardsUseCase(repository: repository))
+                    let vm = CardSearchViewModel(searchCards: SearchCardsUseCase(repository: cardRepository))
                     CardSearchView(viewModel: vm, onClick: { id in
                         path.append(SearchCoordinator.Destination.cardDetail(id: id))
                     }, initialQuery: query)
                 case .cardDetail(let id):
-                    let vm = CardDetailViewModel(getCardDetail: GetCardDetailUseCase(repository: repository))
+                    let vm = CardDetailViewModel(
+                        getCardDetail: GetCardDetailUseCase(repository: cardRepository),
+                        deckRepository: deckRepository,
+                        addCardToDeck: AddCardToDeckUseCase(deckRepository: deckRepository),
+                        getDecksContainingCard: GetDecksContainingCardUseCase(deckRepository: deckRepository)
+                    )
                     CardDetailView(viewModel: vm, cardId: id)
                 }
             }
@@ -53,4 +65,3 @@ struct SearchCoordinatorView: View {
     }
     
     }
-

@@ -8,13 +8,64 @@
 import SwiftUI
 
 final class DecksCoordinator: ObservableObject {
-    @Published var path: [Destination] = []
+    private let cardRepository: CardRepository
+    private let deckRepository: DeckRepository
     
     enum Destination: Hashable {
-        case deckDetail(id: UUID)
+        case deckDetail(deck: Deck)
+        case cardDetail(id: String)
+    }
+    
+    init(cardRepository: CardRepository, deckRepository: DeckRepository) {
+        self.cardRepository = cardRepository
+        self.deckRepository = deckRepository
     }
 
     func makeView() -> some View {
-        DecksView()
+        DecksCoordinatorView(
+            cardRepository: cardRepository,
+            deckRepository: deckRepository
+        )
+    }
+}
+
+struct DecksCoordinatorView: View {
+    @State private var path = NavigationPath()
+    private let cardRepository: CardRepository
+    private let deckRepository: DeckRepository
+    
+    init(cardRepository: CardRepository, deckRepository: DeckRepository) {
+        self.cardRepository = cardRepository
+        self.deckRepository = deckRepository
+    }
+    
+    var body: some View {
+        NavigationStack(path: $path) {
+            DecksView()
+                .navigationDestination(for: DecksCoordinator.Destination.self) { destination in
+                    switch destination {
+                    case .deckDetail(let deck):
+                        let vm = DeckCardsViewModel(
+                            deckRepository: deckRepository,
+                            removeCardFromDeck: RemoveCardFromDeckUseCase(deckRepository: deckRepository)
+                        )
+                        DeckDetailView(
+                            viewModel: vm,
+                            deck: deck,
+                            onNavigateToCard: { cardId in
+                                path.append(DecksCoordinator.Destination.cardDetail(id: cardId))
+                            }
+                        )
+                    case .cardDetail(let id):
+                        let vm = CardDetailViewModel(
+                            getCardDetail: GetCardDetailUseCase(repository: cardRepository),
+                            deckRepository: deckRepository,
+                            addCardToDeck: AddCardToDeckUseCase(deckRepository: deckRepository),
+                            getDecksContainingCard: GetDecksContainingCardUseCase(deckRepository: deckRepository)
+                        )
+                        CardDetailView(viewModel: vm, cardId: id)
+                    }
+                }
+        }
     }
 }

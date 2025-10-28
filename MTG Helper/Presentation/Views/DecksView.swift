@@ -15,32 +15,32 @@ struct DecksView: View {
     @State private var showingAddDeck = false
     
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(decks) { deck in
+        List {
+            ForEach(decks) { deck in
+                NavigationLink(value: DecksCoordinator.Destination.deckDetail(deck: deck)) {
                     DeckRow(deck: deck)
                 }
-                .onDelete(perform: deleteDecks)
             }
-            .navigationTitle("Decks")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showingAddDeck = true }) {
-                        Image(systemName: "plus")
-                    }
+            .onDelete(perform: deleteDecks)
+        }
+        .navigationTitle("Decks")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { showingAddDeck = true }) {
+                    Image(systemName: "plus")
                 }
             }
-            .sheet(isPresented: $showingAddDeck) {
-                DeckFormView()
-            }
-            .overlay {
-                if decks.isEmpty {
-                    ContentUnavailableView(
-                        "Aucun deck",
-                        systemImage: "star.slash",
-                        description: Text("Appuyez sur + pour créer votre premier deck")
-                    )
-                }
+        }
+        .sheet(isPresented: $showingAddDeck) {
+            DeckFormView()
+        }
+        .overlay {
+            if decks.isEmpty {
+                ContentUnavailableView(
+                    "Aucun deck",
+                    systemImage: "star.slash",
+                    description: Text("Appuyez sur + pour créer votre premier deck")
+                )
             }
         }
     }

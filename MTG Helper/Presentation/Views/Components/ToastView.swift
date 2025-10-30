@@ -31,7 +31,7 @@ struct ToastModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .overlay(alignment: .top) {
+            .overlay(alignment: .bottom) {
                 if let toast = toast {
                     ToastView(message: toast.message)
                         .padding(.top, 60)

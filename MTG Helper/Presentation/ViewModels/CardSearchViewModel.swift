@@ -16,6 +16,13 @@ final class CardSearchViewModel: ObservableObject {
     
     /// Indicateur de chargement en cours
     @Published var isLoading = false
+    
+    /// Mode d'affichage de la liste des cartes
+    @Published var displayMode: SearchCardDisplayMode {
+        didSet {
+            UserPreferencesService.shared.searchCardDisplayMode = displayMode
+        }
+    }
 
     private let searchCards: SearchCardsUseCase
 
@@ -23,6 +30,7 @@ final class CardSearchViewModel: ObservableObject {
     /// - Parameter searchCards: Use case responsable de la recherche de cartes
     init(searchCards: SearchCardsUseCase) {
         self.searchCards = searchCards
+        self.displayMode = UserPreferencesService.shared.searchCardDisplayMode
     }
 
     /// Exécute une recherche de cartes basée sur une requête textuelle.

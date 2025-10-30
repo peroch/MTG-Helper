@@ -21,21 +21,24 @@ struct CardSearchView: View {
                 ProgressView("Searching...")
             } else {
                 List(viewModel.cards) { card in
-                    HStack(spacing: 8) {
-                        Text(card.name)
-                            .font(.headline)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
-                        
-                        if let manaCost = card.manaCost, !manaCost.isEmpty {
-                            ManaCostView(manaCost: manaCost, symbolSize: 16)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
+                    Button(action: {
+                        onClick(card.id)
+                    }) {
+                        if viewModel.displayMode == .detailed {
+                            SearchCardDetailedRow(card: card)
+                        } else {
+                            SearchCardCompactRow(card: card)
                         }
                     }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        onClick(card.id)
-                    }
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    viewModel.displayMode = viewModel.displayMode == .detailed ? .compact : .detailed
+                }) {
+                    Image(systemName: viewModel.displayMode == .detailed ? "list.bullet" : "list.bullet.rectangle")
                 }
             }
         }
@@ -44,6 +47,89 @@ struct CardSearchView: View {
                 await viewModel.search(query: q)
             }
         }
+    }
+}
+
+// MARK: - Search Card Detailed Row
+
+struct SearchCardDetailedRow: View {
+    let card: Card
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            if let imageUrlString = card.imageUrl,
+               let imageUrl = URL(string: imageUrlString) {
+                AsyncImage(url: imageUrl) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .frame(width: 60, height: 84)
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 60, height: 84)
+                            .cornerRadius(6)
+                            .clipped()
+                    case .failure:
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(width: 60, height: 84)
+                            .cornerRadius(6)
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+            } else {
+                Rectangle()
+                    .fill(Color.gray.opacity(0.3))
+                    .frame(width: 60, height: 84)
+                    .cornerRadius(6)
+            }
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(card.name)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                
+                if let manaCost = card.manaCost, !manaCost.isEmpty {
+                    ManaCostView(manaCost: manaCost, symbolSize: 14)
+                }
+                
+                if let typeLine = card.typeLine {
+                    Text(typeLine)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                }
+            }
+            
+            Spacer()
+        }
+        .padding(.vertical, 4)
+    }
+}
+
+// MARK: - Search Card Compact Row
+
+struct SearchCardCompactRow: View {
+    let card: Card
+    
+    var body: some View {
+        HStack(spacing: 8) {
+            Text(card.name)
+                .font(.body)
+                .foregroundColor(.primary)
+                .lineLimit(1)
+                .truncationMode(.tail)
+            
+            Spacer()
+            
+            if let manaCost = card.manaCost, !manaCost.isEmpty {
+                ManaCostView(manaCost: manaCost, symbolSize: 16)
+            }
+        }
+        .padding(.vertical, 6)
     }
 }
 

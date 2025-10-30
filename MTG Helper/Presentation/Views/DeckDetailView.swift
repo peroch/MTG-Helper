@@ -45,15 +45,15 @@ struct DeckDetailView: View {
                     ForEach(viewModel.groupedCards, id: \.type) { group in
                         Section {
                             ForEach(group.cards) { deckCard in
-                                Button(action: {
-                                    onNavigateToCard(deckCard.cardId)
-                                }) {
-                                    if viewModel.displayMode == .detailed {
-                                        DeckCardRow(deckCard: deckCard)
-                                    } else {
-                                        DeckCardCompactRow(deckCard: deckCard)
-                                    }
-                                }
+                        Button(action: {
+                            onNavigateToCard(deckCard.cardId)
+                        }) {
+                            if viewModel.displayMode == .detailed {
+                                DeckCardDetailedRow(deckCard: deckCard)
+                            } else {
+                                DeckCardCompactRow(deckCard: deckCard)
+                            }
+                        }
                             }
                             .onDelete { indexSet in
                                 Task {
@@ -111,7 +111,7 @@ struct DeckDetailView: View {
     }
 }
 
-struct DeckCardRow: View {
+struct DeckCardDetailedRow: View {
     let deckCard: DeckCard
     
     var body: some View {

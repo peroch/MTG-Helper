@@ -49,11 +49,10 @@ final class DeckCardsViewModel: ObservableObject {
     @Published private(set) var error: String?
     
     /// Mode d'affichage de la liste des cartes
-    @Published var displayMode: DisplayMode = .detailed
-    
-    enum DisplayMode {
-        case detailed
-        case compact
+    @Published var displayMode: DeckCardDisplayMode {
+        didSet {
+            UserPreferencesService.shared.deckCardDisplayMode = displayMode
+        }
     }
     
     private let deckRepository: DeckRepository
@@ -69,6 +68,7 @@ final class DeckCardsViewModel: ObservableObject {
     ) {
         self.deckRepository = deckRepository
         self.removeCardFromDeck = removeCardFromDeck
+        self.displayMode = UserPreferencesService.shared.deckCardDisplayMode
     }
     
     /// Charge les cartes d'un deck spécifique.

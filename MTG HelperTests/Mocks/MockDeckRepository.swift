@@ -34,6 +34,12 @@ final class MockDeckRepository: DeckRepository {
     var getDecksContainingCardCallCount = 0
     var lastGetDecksContainingCardId: String?
     
+    var updateDeckCallCount = 0
+    var lastUpdatedDeck: Deck?
+    var lastUpdatedName: String?
+    var lastUpdatedFormat: DeckFormat?
+    var updateDeckError: Error?
+    
     func getAllDecks() async throws -> [Deck] {
         getAllDecksCallCount += 1
         
@@ -84,5 +90,20 @@ final class MockDeckRepository: DeckRepository {
         }
         
         return getDecksContainingCardResult
+    }
+    
+    func updateDeck(_ deck: Deck, name: String, format: DeckFormat) async throws {
+        updateDeckCallCount += 1
+        lastUpdatedDeck = deck
+        lastUpdatedName = name
+        lastUpdatedFormat = format
+        
+        if let error = updateDeckError {
+            throw error
+        }
+        
+        deck.name = name
+        deck.format = format
+        deck.updatedAt = Date()
     }
 }

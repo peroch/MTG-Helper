@@ -77,4 +77,17 @@ final class DeckRepositoryImpl: DeckRepository {
         let decks = deckCards.compactMap { $0.deck }
         return Array(Set(decks))
     }
+    
+    /// Met à jour les propriétés d'un deck.
+    /// - Parameters:
+    ///   - deck: Le deck à mettre à jour
+    ///   - name: Le nouveau nom du deck
+    ///   - format: Le nouveau format du deck
+    /// - Throws: Une erreur si la mise à jour échoue
+    func updateDeck(_ deck: Deck, name: String, format: DeckFormat) async throws {
+        deck.name = name
+        deck.format = format
+        deck.updatedAt = Date()
+        try modelContext.save()
+    }
 }

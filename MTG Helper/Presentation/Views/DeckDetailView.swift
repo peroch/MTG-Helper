@@ -11,15 +11,18 @@ struct DeckDetailView: View {
     @StateObject private var viewModel: DeckCardsViewModel
     let deck: Deck
     let onNavigateToCard: (String) -> Void
+    let onNavigateToSettings: () -> Void
     
     init(
         viewModel: DeckCardsViewModel,
         deck: Deck,
-        onNavigateToCard: @escaping (String) -> Void
+        onNavigateToCard: @escaping (String) -> Void,
+        onNavigateToSettings: @escaping () -> Void
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.deck = deck
         self.onNavigateToCard = onNavigateToCard
+        self.onNavigateToSettings = onNavigateToSettings
     }
     
     var body: some View {
@@ -78,10 +81,18 @@ struct DeckDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    viewModel.displayMode = viewModel.displayMode == .detailed ? .compact : .detailed
-                }) {
-                    Image(systemName: viewModel.displayMode == .detailed ? "list.bullet" : "list.bullet.rectangle")
+                HStack(spacing: 16) {
+                    Button(action: {
+                        viewModel.displayMode = viewModel.displayMode == .detailed ? .compact : .detailed
+                    }) {
+                        Image(systemName: viewModel.displayMode == .detailed ? "list.bullet" : "list.bullet.rectangle")
+                    }
+                    
+                    Button(action: {
+                        onNavigateToSettings()
+                    }) {
+                        Image(systemName: "gearshape")
+                    }
                 }
             }
         }

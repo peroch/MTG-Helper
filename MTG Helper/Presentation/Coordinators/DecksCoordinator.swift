@@ -14,6 +14,7 @@ final class DecksCoordinator: ObservableObject {
     enum Destination: Hashable {
         case deckDetail(deck: Deck)
         case cardDetail(id: String)
+        case deckSettings(deck: Deck)
     }
     
     init(cardRepository: CardRepository, deckRepository: DeckRepository) {
@@ -54,6 +55,9 @@ struct DecksCoordinatorView: View {
                             deck: deck,
                             onNavigateToCard: { cardId in
                                 path.append(DecksCoordinator.Destination.cardDetail(id: cardId))
+                            },
+                            onNavigateToSettings: {
+                                path.append(DecksCoordinator.Destination.deckSettings(deck: deck))
                             }
                         )
                     case .cardDetail(let id):
@@ -64,6 +68,12 @@ struct DecksCoordinatorView: View {
                             getDecksContainingCard: GetDecksContainingCardUseCase(deckRepository: deckRepository)
                         )
                         CardDetailView(viewModel: vm, cardId: id)
+                    case .deckSettings(let deck):
+                        let vm = DeckSettingsViewModel(
+                            deck: deck,
+                            updateDeckUseCase: UpdateDeckUseCase(repository: deckRepository)
+                        )
+                        DeckSettingsView(viewModel: vm)
                     }
                 }
         }

@@ -36,4 +36,12 @@ protocol DeckRepository {
     /// - Parameter cardId: L'identifiant de la carte
     /// - Returns: La liste des decks contenant cette carte
     func getDecksContaining(cardId: String) async throws -> [Deck]
+    
+    /// Met à jour les propriétés d'un deck.
+    /// - Parameters:
+    ///   - deck: Le deck à mettre à jour
+    ///   - name: Le nouveau nom du deck
+    ///   - format: Le nouveau format du deck
+    /// - Throws: Une erreur si la mise à jour échoue
+    func updateDeck(_ deck: Deck, name: String, format: DeckFormat) async throws
 }

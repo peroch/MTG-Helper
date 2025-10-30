@@ -40,7 +40,7 @@ final class CardSearchViewModelTests: XCTestCase {
         
         // Then
         XCTAssertEqual(viewModel.cards.count, 3, "Should return 3 cards")
-        XCTAssertEqual(viewModel.cards, expectedCards, "Cards should match expected results")
+        XCTAssertEqual(viewModel.cards.map { $0.id }, expectedCards.map { $0.id }, "Cards should match expected results")
         XCTAssertFalse(viewModel.isLoading, "Loading should be false after completion")
         XCTAssertEqual(mockRepository.searchCallCount, 1, "Repository search should be called once")
         XCTAssertEqual(mockRepository.lastSearchQuery, query, "Query should match")

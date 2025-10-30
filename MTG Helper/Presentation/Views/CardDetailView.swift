@@ -133,6 +133,7 @@ struct CardDetailView: View {
                 }
             )
         }
+        .toast($viewModel.toastMessage)
     }
 }
 

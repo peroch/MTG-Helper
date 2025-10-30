@@ -22,6 +22,7 @@ struct CardDTO: Decodable {
     let imageUris: ImageUrisDTO?
     let cardFaces: [CardFaceDTO]?
     let manaCost: String?
+    let typeLine: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -29,6 +30,7 @@ struct CardDTO: Decodable {
         case imageUris = "image_uris"
         case cardFaces = "card_faces"
         case manaCost = "mana_cost"
+        case typeLine = "type_line"
     }
 }
 

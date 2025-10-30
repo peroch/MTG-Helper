@@ -1,9 +1,54 @@
-# Xcode
-#
-# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
+# Xcode
 ## User settings
 xcuserdata/
+*.xcuserstate
+*.xcuserdatad
+
+## Compatibility with Xcode 8 and earlier
+*.xcscmblueprint
+*.xccheckout
+
+## Compatibility with Xcode 3 and earlier
+profile
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Build generated
+build/
+DerivedData/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
 
 ## Obj-C/Swift specific
 *.hmap
@@ -18,45 +63,131 @@ timeline.xctimeline
 playground.xcworkspace
 
 # Swift Package Manager
-#
-# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
-# Packages/
-# Package.pins
-# Package.resolved
-# *.xcodeproj
-#
-# Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
-# hence it is not needed unless you have added a package configuration file to your project
-# .swiftpm
-
+.swiftpm/
 .build/
+Packages/
+Package.pins
+Package.resolved
+*.xcodeproj
+.package.resolved
 
 # CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-#
-# Pods/
-#
-# Add this line if you want to avoid checking in source code from the Xcode workspace
-# *.xcworkspace
+Pods/
+*.xcworkspace
+!default.xcworkspace
+Podfile.lock
 
 # Carthage
-#
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
 Carthage/Build/
+Carthage/Checkouts/
+
+# Accio dependency management
+Dependencies/
+.accio/
 
 # fastlane
-#
-# It is recommended to not store the screenshots in the git repo.
-# Instead, use fastlane to re-generate the screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/#source-control
-
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+fastlane/README.md
+fastlane/.env
+fastlane/.env.*
+
+# Code Injection
+iOSInjectionProject/
+
+# AppCode
+.idea/
+*.iml
+
+# SwiftLint
+.swiftlint.yml
+
+# Tuist
+.tuist-version
+.tuist-bin
+
+# XCFramework
+*.xcframework
+
+# Firebase
+GoogleService-Info.plist
+google-services.json
+
+# Secrets et configuration sensible
+*.p12
+*.mobileprovision
+*.certSigningRequest
+*.cer
+*.p8
+secrets.json
+config.json
+API-Keys.plist
+*.key
+*.pem
+
+# Tests
+*.gcov
+*.gcda
+*.gcno
+coverage/
+*.profraw
+*.profdata
+test_output/
+TestResults/
+
+# Code coverage
+*.lcov
+*.coverage
+.coverage/
+coverage.xml
+htmlcov/
+
+# Documentation générée
+docs/generated/
+*.docset
+
+# Backup files
+*~.nib
+*.swp
+*~
+*.backup
+*.bak
+
+# Logs
+*.log
+logs/
+
+# CI/CD
+.circleci/
+.gitlab-ci.yml
+.travis.yml
+
+# IDEs spécifiques
+.vscode/
+.fleet/
+
+# Archives et fichiers temporaires
+*.zip
+*.tar
+*.tar.gz
+*.rar
+temp/
+tmp/
+
+# Xcode Instruments
+*.trace
+Instruments/
+
+# Xcode Preview Content
+**/Preview Content/
+
+# R.swift
+*.generated.swift
+
+# Sourcery
+**/Generated/
+
+# Mockolo
+**/Mocks/Generated/

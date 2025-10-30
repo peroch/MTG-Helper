@@ -39,33 +39,36 @@ struct DeckDetailView: View {
                 }
             } else {
                 List {
-                    Section {
-                        ForEach(viewModel.cards) { deckCard in
-                            Button(action: {
-                                onNavigateToCard(deckCard.cardId)
-                            }) {
-                                if viewModel.displayMode == .detailed {
-                                    DeckCardRow(deckCard: deckCard)
-                                } else {
-                                    DeckCardCompactRow(deckCard: deckCard)
+                    ForEach(viewModel.groupedCards, id: \.type) { group in
+                        Section {
+                            ForEach(group.cards) { deckCard in
+                                Button(action: {
+                                    onNavigateToCard(deckCard.cardId)
+                                }) {
+                                    if viewModel.displayMode == .detailed {
+                                        DeckCardRow(deckCard: deckCard)
+                                    } else {
+                                        DeckCardCompactRow(deckCard: deckCard)
+                                    }
                                 }
                             }
-                        }
-                        .onDelete { indexSet in
-                            Task {
-                                for index in indexSet {
-                                    let deckCard = viewModel.cards[index]
-                                    await viewModel.removeCard(deckCard, from: deck)
+                            .onDelete { indexSet in
+                                Task {
+                                    for index in indexSet {
+                                        let deckCard = group.cards[index]
+                                        await viewModel.removeCard(deckCard, from: deck)
+                                    }
                                 }
                             }
-                        }
-                    } header: {
-                        HStack {
-                            Text("Cards")
-                            Spacer()
-                            Text("\(viewModel.cards.count) card(s)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                        } header: {
+                            HStack {
+                                Text(group.type)
+                                    .font(.headline)
+                                Spacer()
+                                Text("\(group.cards.count) card(s)")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     }
                 }

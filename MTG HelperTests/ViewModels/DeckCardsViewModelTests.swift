@@ -36,8 +36,8 @@ final class DeckCardsViewModelTests: XCTestCase {
         // Given
         let deck = TestDataFactory.createDeck()
         let expectedCards = [
-            TestDataFactory.createDeckCard(quantity: 2),
-            TestDataFactory.createDeckCard(quantity: 4)
+            TestDataFactory.createDeckCard(),
+            TestDataFactory.createDeckCard()
         ]
         mockDeckRepository.getCardsResult = expectedCards
         
@@ -46,7 +46,7 @@ final class DeckCardsViewModelTests: XCTestCase {
         
         // Then
         XCTAssertEqual(viewModel.cards.count, 2, "Should load 2 cards")
-        XCTAssertEqual(viewModel.cards, expectedCards, "Cards should match expected")
+        XCTAssertEqual(viewModel.cards.map { $0.id }, expectedCards.map { $0.id }, "Cards should match expected")
         XCTAssertFalse(viewModel.isLoading, "Loading should be false after completion")
         XCTAssertNil(viewModel.error, "Error should be nil on success")
         XCTAssertEqual(mockDeckRepository.getCardsCallCount, 1, "getCards should be called once")

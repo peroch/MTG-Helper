@@ -36,7 +36,7 @@ final class SearchCardsUseCaseTests: XCTestCase {
         
         // Then
         XCTAssertEqual(result.count, 3, "Should return 3 cards")
-        XCTAssertEqual(result, expectedCards, "Results should match expected cards")
+        XCTAssertEqual(result.map { $0.id }, expectedCards.map { $0.id }, "Results should match expected cards")
         XCTAssertEqual(mockRepository.searchCallCount, 1, "Repository should be called once")
         XCTAssertEqual(mockRepository.lastSearchQuery, query, "Query should be passed to repository")
     }

@@ -6,18 +6,30 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		FDF94A352E2F924D0094034F /* MTGSDKSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FDF94A342E2F924D0094034F /* MTGSDKSwift */; };
-/* End PBXBuildFile section */
+/* Begin PBXContainerItemProxy section */
+		FDA17D542EB123F2001F358D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD3016AF2E2F87860049072F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FD3016B62E2F87860049072F;
+			remoteInfo = "MTG Helper";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		FD3016B72E2F87860049072F /* MTG Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MTG Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDA17D502EB123F2001F358D /* MTG HelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MTG HelperTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FD3016B92E2F87860049072F /* MTG Helper */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "MTG Helper";
+			sourceTree = "<group>";
+		};
+		FDA17D512EB123F2001F358D /* MTG HelperTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "MTG HelperTests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -27,7 +39,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDF94A352E2F924D0094034F /* MTGSDKSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDA17D4D2EB123F2001F358D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				FD3016B92E2F87860049072F /* MTG Helper */,
+				FDA17D512EB123F2001F358D /* MTG HelperTests */,
 				FD3016B82E2F87860049072F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				FD3016B72E2F87860049072F /* MTG Helper.app */,
+				FDA17D502EB123F2001F358D /* MTG HelperTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,11 +90,33 @@
 			);
 			name = "MTG Helper";
 			packageProductDependencies = (
-				FDF94A342E2F924D0094034F /* MTGSDKSwift */,
 			);
 			productName = "MTG Helper";
 			productReference = FD3016B72E2F87860049072F /* MTG Helper.app */;
 			productType = "com.apple.product-type.application";
+		};
+		FDA17D4F2EB123F2001F358D /* MTG HelperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FDA17D582EB123F2001F358D /* Build configuration list for PBXNativeTarget "MTG HelperTests" */;
+			buildPhases = (
+				FDA17D4C2EB123F2001F358D /* Sources */,
+				FDA17D4D2EB123F2001F358D /* Frameworks */,
+				FDA17D4E2EB123F2001F358D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FDA17D552EB123F2001F358D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FDA17D512EB123F2001F358D /* MTG HelperTests */,
+			);
+			name = "MTG HelperTests";
+			packageProductDependencies = (
+			);
+			productName = "MTG HelperTests";
+			productReference = FDA17D502EB123F2001F358D /* MTG HelperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -89,6 +131,10 @@
 					FD3016B62E2F87860049072F = {
 						CreatedOnToolsVersion = 16.4;
 					};
+					FDA17D4F2EB123F2001F358D = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = FD3016B62E2F87860049072F;
+					};
 				};
 			};
 			buildConfigurationList = FD3016B22E2F87860049072F /* Build configuration list for PBXProject "MTG Helper" */;
@@ -101,7 +147,6 @@
 			mainGroup = FD3016AE2E2F87860049072F;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				FDF94A332E2F924D0094034F /* XCRemoteSwiftPackageReference "mtg-sdk-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FD3016B82E2F87860049072F /* Products */;
@@ -109,12 +154,20 @@
 			projectRoot = "";
 			targets = (
 				FD3016B62E2F87860049072F /* MTG Helper */,
+				FDA17D4F2EB123F2001F358D /* MTG HelperTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		FD3016B52E2F87860049072F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDA17D4E2EB123F2001F358D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -131,7 +184,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FDA17D4C2EB123F2001F358D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FDA17D552EB123F2001F358D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FD3016B62E2F87860049072F /* MTG Helper */;
+			targetProxy = FDA17D542EB123F2001F358D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		FD3016C22E2F87870049072F /* Debug */ = {
@@ -321,6 +389,52 @@
 			};
 			name = Release;
 		};
+		FDA17D562EB123F2001F358D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9S32C578K5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tuto.MTG-HelperTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MTG Helper.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MTG Helper";
+			};
+			name = Debug;
+		};
+		FDA17D572EB123F2001F358D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9S32C578K5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tuto.MTG-HelperTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MTG Helper.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MTG Helper";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -342,26 +456,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		FDA17D582EB123F2001F358D /* Build configuration list for PBXNativeTarget "MTG HelperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDA17D562EB123F2001F358D /* Debug */,
+				FDA17D572EB123F2001F358D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		FDF94A332E2F924D0094034F /* XCRemoteSwiftPackageReference "mtg-sdk-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MagicTheGathering/mtg-sdk-swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		FDF94A342E2F924D0094034F /* MTGSDKSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FDF94A332E2F924D0094034F /* XCRemoteSwiftPackageReference "mtg-sdk-swift" */;
-			productName = MTGSDKSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FD3016AF2E2F87860049072F /* Project object */;
 }

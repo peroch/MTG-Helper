@@ -31,7 +31,7 @@ final class MockCardRepository: CardRepository {
         return searchResult
     }
     
-    func getCard(id: String) async throws -> Card {
+    func getDetail(id: String) async throws -> Card {
         getCardCallCount += 1
         lastGetCardId = id
         

@@ -26,7 +26,8 @@ final class DeckRepositoryImpl: DeckRepository {
             cardId: card.id,
             cardName: card.name,
             cardImageUrl: card.imageUrl,
-            cardManaCost: card.manaCost
+            cardManaCost: card.manaCost,
+            cardTypeLine: card.typeLine
         )
         
         deckCard.deck = deck

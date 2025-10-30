@@ -26,6 +26,8 @@ final class DeckCard {
     
     /// Coût en mana de la carte (stocké pour faciliter l'affichage)
     var cardManaCost: String?
+
+    var cardTypeLine: String?
     
     /// Référence vers le deck parent
     var deck: Deck?
@@ -33,12 +35,13 @@ final class DeckCard {
     /// Date d'ajout de la carte au deck
     var addedAt: Date
     
-    init(cardId: String, cardName: String, cardImageUrl: String?, cardManaCost: String?) {
+    init(cardId: String, cardName: String, cardImageUrl: String?, cardManaCost: String?, cardTypeLine: String?) {
         self.id = UUID()
         self.cardId = cardId
         self.cardName = cardName
         self.cardImageUrl = cardImageUrl
         self.cardManaCost = cardManaCost
+        self.cardTypeLine = cardTypeLine
         self.addedAt = Date()
     }
 }

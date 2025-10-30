@@ -36,7 +36,7 @@ final class RemoveCardFromDeckUseCaseTests: XCTestCase {
         // Then
         XCTAssertEqual(mockRepository.removeCardCallCount, 1, "removeCard should be called once")
         XCTAssertEqual(mockRepository.lastRemovedDeckCard?.cardId, deckCard.cardId, "Removed card should match")
-        XCTAssertEqual(mockRepository.lastRemovedDeckCard?.name, deckCard.name, "Card name should match")
+        XCTAssertEqual(mockRepository.lastRemovedDeckCard?.cardName, deckCard.cardName, "Card name should match")
         XCTAssertEqual(mockRepository.lastRemovedFromDeck?.name, deck.name, "Deck should match")
     }
     

@@ -13,6 +13,35 @@ final class DeckCardsViewModel: ObservableObject {
     /// Liste des cartes du deck
     @Published private(set) var cards: [DeckCard] = []
     
+    /// Ordre de priorité pour le tri des types de cartes
+    private let typeSortOrder: [String] = [
+        "Creature",
+        "Land",
+        "Instant",
+        "Sorcery",
+        "Enchantment",
+        "Artifact",
+        "Planeswalker"
+    ]
+    
+    /// Cartes groupées par type et triées selon l'ordre de priorité
+    var groupedCards: [(type: String, cards: [DeckCard])] {
+        let grouped = Dictionary(grouping: cards) { card in
+            card.cardTypeLine ?? "Unknown"
+        }
+        
+        return grouped.sorted { lhs, rhs in
+            let lhsIndex = typeSortOrder.firstIndex(of: lhs.key) ?? Int.max
+            let rhsIndex = typeSortOrder.firstIndex(of: rhs.key) ?? Int.max
+            
+            if lhsIndex == rhsIndex {
+                return lhs.key < rhs.key
+            }
+            return lhsIndex < rhsIndex
+        }
+        .map { (type: $0.key, cards: $0.value.sorted { $0.cardName < $1.cardName }) }
+    }
+    
     /// Indicateur de chargement en cours
     @Published private(set) var isLoading = false
     

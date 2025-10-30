@@ -27,6 +27,8 @@ struct Card: Identifiable {
     
     /// Coût en mana de la carte (format texte avec symboles)
     var manaCost: String?
+
+    var typeLine: String?
 }
 
 /// Entité représentant un ruling (décision de juge) pour une carte.

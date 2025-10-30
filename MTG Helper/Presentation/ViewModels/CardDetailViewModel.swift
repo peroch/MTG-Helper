@@ -29,6 +29,9 @@ final class CardDetailViewModel: ObservableObject {
     /// Indicateur d'affichage du sélecteur de deck
     @Published var showDeckPicker = false
     
+    /// Message toast à afficher
+    @Published var toastMessage: ToastMessage?
+    
     private let getCardDetail: GetCardDetailUseCase
     private let deckRepository: DeckRepository
     private let addCardToDeck: AddCardToDeckUseCase
@@ -97,6 +100,11 @@ final class CardDetailViewModel: ObservableObject {
             try await addCardToDeck.execute(card: card, to: deck)
             await loadDecksContainingCard()
             showDeckPicker = false
+            
+            // Afficher un toast de confirmation
+            toastMessage = ToastMessage(
+                message: "\(card.name) added to \(deck.name) - \(deck.format)"
+            )
         } catch {
             self.error = error.localizedDescription
         }

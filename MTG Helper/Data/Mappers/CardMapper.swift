@@ -13,9 +13,11 @@ enum CardMapper {
     
     /// Convertit un CardDTO en entité Card.
     /// Gère les cartes double-face en extrayant les données de la première face si nécessaire.
-    /// - Parameter dto: DTO représentant la carte depuis l'API Scryfall
+    /// - Parameters:
+    ///   - dto: DTO représentant la carte depuis l'API Scryfall
+    ///   - rulings: Tableau des rulings associés à la carte (par défaut vide)
     /// - Returns: Entité Card utilisable dans le domain layer
-    static func map(_ dto: CardDTO) -> Card {
+    static func map(_ dto: CardDTO, rulings: [String] = []) -> Card {
         let faceOracleText = dto.cardFaces?.first?.oracleText
         let faceImageUrl = dto.cardFaces?.first?.imageUris?.normal
         
@@ -27,7 +29,7 @@ enum CardMapper {
             name: dto.name,
             oracleText: dto.oracleText ?? faceOracleText,
             imageUrl: dto.imageUris?.normal ?? faceImageUrl,
-            rulings: [],
+            rulings: rulings,
             manaCost: dto.manaCost,
             typeLine: processedTypeLine
         )

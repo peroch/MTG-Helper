@@ -194,7 +194,24 @@ final class CardDetailViewModelTests: XCTestCase {
         
         // Then
         XCTAssertNotNil(viewModel.error, "Error should be set")
-//        XCTAssertTrue(viewModel.showDeckPicker, "Deck picker should remain visible on error")
+    }
+    
+    func testAddToDeck_Success_ShouldShowToastMessage() async {
+        // Given
+        let card = TestDataFactory.createCard()
+        let deck = TestDataFactory.createDeck()
+        mockCardRepository.getCardResult = card
+        mockDeckRepository.getDecksContainingCardResult = [deck]
+        
+        await viewModel.load(id: card.id)
+        
+        // When
+        await viewModel.addToDeck(deck)
+        
+        // Then
+        XCTAssertNotNil(viewModel.toastMessage, "Toast message should be set")
+        XCTAssertTrue(viewModel.toastMessage?.message.contains(card.name) ?? false, "Toast should contain card name")
+        XCTAssertTrue(viewModel.toastMessage?.message.contains(deck.name) ?? false, "Toast should contain deck name")
     }
     
     // MARK: - Tests de l'état initial

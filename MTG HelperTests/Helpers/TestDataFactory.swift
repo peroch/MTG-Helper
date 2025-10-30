@@ -17,22 +17,27 @@ enum TestDataFactory {
     ///   - name: Nom de la carte (par défaut : "Lightning Bolt")
     ///   - oracleText: Texte Oracle (par défaut : "Deal 3 damage...")
     ///   - imageUrl: URL de l'image (par défaut : "https://example.com/card.jpg")
+    ///   - rulings: Liste des rulings (par défaut : tableau vide)
     ///   - manaCost: Coût en mana (par défaut : "{R}")
+    ///   - typeLine: Type de la carte (par défaut : nil)
     /// - Returns: Une instance de Card pour les tests
     static func createCard(
         id: String = "test-card-1",
         name: String = "Lightning Bolt",
         oracleText: String? = "Deal 3 damage to any target.",
         imageUrl: String? = "https://example.com/card.jpg",
-        manaCost: String? = "{R}"
+        rulings: [String] = [],
+        manaCost: String? = "{R}",
+        typeLine: String? = nil
     ) -> Card {
         return Card(
             id: id,
             name: name,
             oracleText: oracleText,
             imageUrl: imageUrl,
-            rulings: [],
-            manaCost: manaCost
+            rulings: rulings,
+            manaCost: manaCost,
+            typeLine: typeLine
         )
     }
 

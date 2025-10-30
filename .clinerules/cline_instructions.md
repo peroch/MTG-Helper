@@ -27,6 +27,8 @@ Toutes les suggestions, corrections ou propositions de code doivent **respecter 
 - Éviter **toute dépendance externe inutile** : privilégier les solutions natives SwiftUI / Foundation.  
 - **Ne jamais exécuter, compiler ou lancer le simulateur** sauf demande explicite.  
 - Favoriser la **simplicité et la maintenabilité** plutôt que la micro-optimisation.
+- N'essaye **jamais de compiler ou de lancer des commandes** sans demande explicite de ma part
+- Ne te bloque jamais en attente d'execution d'une requete
 
 ---
 

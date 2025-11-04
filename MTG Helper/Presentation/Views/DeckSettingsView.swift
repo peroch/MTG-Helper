@@ -19,10 +19,10 @@ struct DeckSettingsView: View {
         NavigationView {
             Form {
                 Section {
-                    TextField("Nom du deck", text: $viewModel.name)
+                    TextField("Deck name", text: $viewModel.name)
                         .textFieldStyle(.plain)
                 } header: {
-                    Text("Nom")
+                    Text("Name")
                 }
                 
                 Section {
@@ -39,30 +39,30 @@ struct DeckSettingsView: View {
                 
                 Section {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Suggestions de formats supplémentaires")
+                        Text("Additional format suggestions")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         
-                        Text("Vous souhaitez d'autres formats ? N'hésitez pas à les suggérer.")
+                        Text("Want other formats? Feel free to suggest them.")
                             .font(.caption2)
                             .foregroundColor(.secondary)
                     }
                 } header: {
-                    Text("À venir")
+                    Text("Coming Soon")
                 }
             }
-            .navigationTitle("Paramètres du deck")
+            .navigationTitle("Deck Settings")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Annuler") {
+                    Button("Cancel") {
                         viewModel.cancelChanges()
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Enregistrer") {
+                    Button("Save") {
                         Task {
                             await viewModel.saveDeck()
                             if viewModel.showSuccessMessage {
@@ -73,7 +73,7 @@ struct DeckSettingsView: View {
                     .disabled(!viewModel.hasChanges || viewModel.isLoading)
                 }
             }
-            .alert("Erreur", isPresented: .constant(viewModel.error != nil)) {
+            .alert("Error", isPresented: .constant(viewModel.error != nil)) {
                 Button("OK") {
                     viewModel.error = nil
                 }

@@ -109,10 +109,49 @@ if [ $TEST_EXIT_CODE -eq 0 ]; then
 else
     echo -e "${RED}✗ Tests failed!${NC}"
     echo ""
-    echo -e "${RED}Failed tests details:${NC}"
-    grep -A 5 "Test Case.*failed" "$TEST_RESULT_PATH/test_output.log" || echo "See full log for details"
+    
+    # Extract and display failed tests
+    echo -e "${RED}Failed Tests:${NC}"
+    echo -e "${RED}─────────────────────────────────────────────────${NC}"
+    
+    # Parse test output to find failed tests
+    grep "Test Case.*failed" "$TEST_RESULT_PATH/test_output.log" | while read -r line; do
+        # Extract test name
+        TEST_NAME=$(echo "$line" | sed -E 's/.*Test Case.*-\[(.*)\].*/\1/')
+        echo -e "${RED}  ✗ $TEST_NAME${NC}"
+    done
+    
     echo ""
-    echo -e "${RED}Full test log: $TEST_RESULT_PATH/test_output.log${NC}"
+    
+    # Show detailed failure messages
+    echo -e "${RED}Failure Details:${NC}"
+    echo -e "${RED}─────────────────────────────────────────────────${NC}"
+    
+    # Extract failure assertions
+    grep -B 2 "failed -" "$TEST_RESULT_PATH/test_output.log" | grep -E "(XCTAssertEqual|XCTAssertTrue|XCTAssertFalse|XCTAssertNil|XCTAssertNotNil|XCTAssert|failed)" | while read -r line; do
+        if [[ $line == *"failed"* ]]; then
+            echo -e "${RED}$line${NC}"
+        else
+            echo -e "${YELLOW}  → $line${NC}"
+        fi
+    done
+    
+    echo ""
+    
+    # Extract test statistics
+    TOTAL_TESTS=$(grep "Executed.*tests" "$TEST_RESULT_PATH/test_output.log" | tail -1 | grep -o "[0-9]* tests" | grep -o "[0-9]*" || echo "Unknown")
+    FAILED_TESTS=$(grep "Test Suite.*failed" "$TEST_RESULT_PATH/test_output.log" | tail -1 | grep -o "[0-9]* failure" | grep -o "[0-9]*" || echo "Unknown")
+    
+    echo -e "${YELLOW}Summary:${NC}"
+    echo -e "${YELLOW}  Total tests: $TOTAL_TESTS${NC}"
+    echo -e "${RED}  Failed: $FAILED_TESTS${NC}"
+    echo ""
+    echo -e "${YELLOW}Full test log: $TEST_RESULT_PATH/test_output.log${NC}"
+    echo -e "${YELLOW}Test results bundle: $TEST_RESULT_PATH/TestResults.xcresult${NC}"
+    echo ""
+    echo -e "${YELLOW}To analyze failures in Xcode:${NC}"
+    echo -e "${YELLOW}  open $TEST_RESULT_PATH/TestResults.xcresult${NC}"
+    
     exit $TEST_EXIT_CODE
 fi
 

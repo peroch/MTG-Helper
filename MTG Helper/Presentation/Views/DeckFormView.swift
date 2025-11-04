@@ -18,8 +18,8 @@ struct DeckFormView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Informations")) {
-                    TextField("Nom du deck", text: $deckName)
+                Section(header: Text("Information")) {
+                    TextField("Deck name", text: $deckName)
                     
                     Picker("Format", selection: $selectedFormat) {
                         ForEach(DeckFormat.allCases, id: \.self) { format in
@@ -28,17 +28,17 @@ struct DeckFormView: View {
                     }
                 }
             }
-            .navigationTitle("Nouveau Deck")
+            .navigationTitle("New Deck")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Annuler") {
+                    Button("Cancel") {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Enregistrer") {
+                    Button("Save") {
                         saveDeck()
                     }
                     .disabled(deckName.isEmpty)

@@ -11,7 +11,19 @@ import Foundation
 /// Mock du CardRepository pour les tests unitaires.
 final class MockCardRepository: CardRepository {
     var searchResult: [Card] = []
+    var mockCards: [Card] {
+        get { searchResult }
+        set { searchResult = newValue }
+    }
     var searchError: Error?
+    var shouldThrowError: Bool {
+        get { searchError != nil }
+        set { if !newValue { searchError = nil } }
+    }
+    var errorToThrow: Error {
+        get { searchError ?? NSError(domain: "Test", code: -1) }
+        set { searchError = newValue }
+    }
     var searchCallCount = 0
     var lastSearchQuery: String?
     

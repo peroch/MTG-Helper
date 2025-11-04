@@ -48,9 +48,9 @@ struct DecksView: View {
         .overlay {
             if decks.isEmpty {
                 ContentUnavailableView(
-                    "Aucun deck",
+                    "No decks",
                     systemImage: "star.slash",
-                    description: Text("Appuyez sur + pour créer votre premier deck")
+                    description: Text("Tap + to create your first deck")
                 )
             }
         }

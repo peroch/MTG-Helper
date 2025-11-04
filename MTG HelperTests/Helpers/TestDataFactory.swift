@@ -97,4 +97,28 @@ enum TestDataFactory {
             )
         }
     }
+    
+    /// Crée un prix CardMarket de test avec des valeurs par défaut personnalisables.
+    /// - Parameters:
+    ///   - cardName: Nom de la carte
+    ///   - cardId: Identifiant de la carte
+    ///   - lowestPrice: Prix le plus bas
+    ///   - trendPrice: Prix de tendance
+    ///   - averagePrice: Prix moyen
+    /// - Returns: Une instance de CardMarketPrice pour les tests
+    static func createCardMarketPrice(
+        cardName: String = "Test Card",
+        cardId: String = "test-id",
+        lowestPrice: Double? = 1.0,
+        trendPrice: Double? = 1.5,
+        averagePrice: Double? = 1.2
+    ) -> CardMarketPrice {
+        return CardMarketPrice(
+            cardName: cardName,
+            cardId: cardId,
+            lowestPrice: lowestPrice,
+            trendPrice: trendPrice,
+            averagePrice: averagePrice
+        )
+    }
 }

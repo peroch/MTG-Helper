@@ -19,10 +19,13 @@ struct CoordinatorRootView: View {
 struct CoordinatorRootContentView: View {
     @StateObject private var searchCoordinator: SearchCoordinator
     @StateObject private var decksCoordinator: DecksCoordinator
+    @StateObject private var gameCoordinator: GameCoordinator
+    @StateObject private var cardMarketCoordinator: CardMarketCoordinator
     
     init(modelContext: ModelContext) {
         let cardRepository = CardRepositoryImpl(api: ScryfallAPIClient())
         let deckRepository = DeckRepositoryImpl(modelContext: modelContext)
+        let cardMarketRepository = CardMarketRepositoryImpl(apiClient: CardMarketAPIClient())
         
         _searchCoordinator = StateObject(wrappedValue: SearchCoordinator(
             cardRepository: cardRepository,
@@ -32,6 +35,13 @@ struct CoordinatorRootContentView: View {
         _decksCoordinator = StateObject(wrappedValue: DecksCoordinator(
             cardRepository: cardRepository,
             deckRepository: deckRepository
+        ))
+        
+        _gameCoordinator = StateObject(wrappedValue: GameCoordinator())
+        
+        _cardMarketCoordinator = StateObject(wrappedValue: CardMarketCoordinator(
+            cardRepository: cardRepository,
+            cardMarketRepository: cardMarketRepository
         ))
     }
     
@@ -45,6 +55,16 @@ struct CoordinatorRootContentView: View {
             decksCoordinator.makeView()
                 .tabItem {
                     Label("Decks", systemImage: "star.fill")
+                }
+            
+            cardMarketCoordinator.makeView()
+                .tabItem {
+                    Label("CardMarket", systemImage: "eurosign.circle.fill")
+                }
+            
+            gameCoordinator.makeView()
+                .tabItem {
+                    Label("Play", systemImage: "gamecontroller.fill")
                 }
         }
     }

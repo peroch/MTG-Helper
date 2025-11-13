@@ -1,6 +1,6 @@
 //
 //  ManaSymbolHelper.swift
-//  MTG Helper
+//  CoreUI
 //
 //  Created by Dan PEROCHEAU on 24/10/2025.
 //
@@ -8,10 +8,10 @@
 import SwiftUI
 import Foundation
 
-struct ManaSymbolHelper {
+public struct ManaSymbolHelper {
     
     // Liste des symboles de mana supportés
-    static let supportedSymbols: Set<String> = [
+    public static let supportedSymbols: Set<String> = [
         // Couleurs de base
         "W", "U", "B", "R", "G", "C",
         
@@ -27,7 +27,7 @@ struct ManaSymbolHelper {
     ]
     
     /// Parse un coût de mana et retourne les symboles individuels
-    static func parseManaCost(_ manaCost: String) -> [String] {
+    public static func parseManaCost(_ manaCost: String) -> [String] {
         // Regex pour extraire les symboles entre accolades
         let pattern = "\\{([^}]+)\\}"
         let regex = try! NSRegularExpression(pattern: pattern)
@@ -42,28 +42,28 @@ struct ManaSymbolHelper {
     }
     
     /// Obtient l'image locale pour un symbole de mana
-    static func getLocalImage(for symbol: String) -> String? {
+    public static func getLocalImage(for symbol: String) -> String? {
         guard supportedSymbols.contains(symbol) else { return nil }
         return "symbols/\(symbol).png"
     }
     
     /// Obtient l'URL de fallback pour un symbole de mana (si l'image locale n'existe pas)
-    static func getFallbackURL(for symbol: String) -> String? {
+    public static func getFallbackURL(for symbol: String) -> String? {
         return "https://svgs.scryfall.io/card-symbols/\(symbol).svg"
     }
 }
 
 // Vue SwiftUI pour afficher un symbole de mana
-struct ManaSymbolView: View {
+public struct ManaSymbolView: View {
     let symbol: String
     let size: CGFloat
     
-    init(symbol: String, size: CGFloat = 16) {
+    public init(symbol: String, size: CGFloat = 16) {
         self.symbol = symbol
         self.size = size
     }
     
-    var body: some View {
+    public var body: some View {
         // Charger l'image depuis l'asset catalog
         if let image = UIImage(named: symbol) {
             Image(uiImage: image)
@@ -97,16 +97,16 @@ struct ManaSymbolView: View {
 }
 
 // Vue pour afficher un coût de mana complet
-struct ManaCostView: View {
+public struct ManaCostView: View {
     let manaCost: String
     let symbolSize: CGFloat
     
-    init(manaCost: String, symbolSize: CGFloat = 16) {
+    public init(manaCost: String, symbolSize: CGFloat = 16) {
         self.manaCost = manaCost
         self.symbolSize = symbolSize
     }
     
-    var body: some View {
+    public var body: some View {
         HStack(spacing: 2) {
             let symbols = ManaSymbolHelper.parseManaCost(manaCost)
             ForEach(symbols, id: \.self) { symbol in

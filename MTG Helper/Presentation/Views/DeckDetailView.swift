@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreUI
 
 struct DeckDetailView: View {
     @StateObject private var viewModel: DeckCardsViewModel

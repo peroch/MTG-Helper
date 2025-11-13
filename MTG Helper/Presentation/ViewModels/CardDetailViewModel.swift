@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreUI
 
 /// ViewModel gérant l'affichage des détails d'une carte.
 /// Encapsule l'état de chargement, les erreurs et les données de la carte.
@@ -30,7 +31,7 @@ final class CardDetailViewModel: ObservableObject {
     @Published var showDeckPicker = false
     
     /// Message toast à afficher
-    @Published var toastMessage: ToastMessage?
+    @Published var toastMessage: CoreUI.ToastMessage?
     
     private let getCardDetail: GetCardDetailUseCase
     private let deckRepository: DeckRepository

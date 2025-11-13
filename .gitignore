@@ -65,11 +65,15 @@ playground.xcworkspace
 # Swift Package Manager
 .swiftpm/
 .build/
-Packages/
 Package.pins
 Package.resolved
-*.xcodeproj
 .package.resolved
+
+# Ignore dependencies downloaded by SPM (not local packages)
+# Local packages in Packages/ should be committed
+Packages/*/.build/
+Packages/*/xcuserdata/
+Packages/*/*.xcodeproj
 
 # CocoaPods
 Pods/

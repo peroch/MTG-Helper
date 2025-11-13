@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FD7B14FA2EC6249A00705A1B /* CoreUI in Frameworks */ = {isa = PBXBuildFile; productRef = FD7B14F92EC6249A00705A1B /* CoreUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		FDA17D542EB123F2001F358D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -39,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD7B14FA2EC6249A00705A1B /* CoreUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +62,7 @@
 			children = (
 				FD3016B92E2F87860049072F /* MTG Helper */,
 				FDA17D512EB123F2001F358D /* MTG HelperTests */,
+				FDE4EE642EBD0AD30097D7ED /* Frameworks */,
 				FD3016B82E2F87860049072F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,6 +74,13 @@
 				FDA17D502EB123F2001F358D /* MTG HelperTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FDE4EE642EBD0AD30097D7ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -90,6 +103,7 @@
 			);
 			name = "MTG Helper";
 			packageProductDependencies = (
+				FD7B14F92EC6249A00705A1B /* CoreUI */,
 			);
 			productName = "MTG Helper";
 			productReference = FD3016B72E2F87860049072F /* MTG Helper.app */;
@@ -147,6 +161,7 @@
 			mainGroup = FD3016AE2E2F87860049072F;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				FD7B14F82EC6249A00705A1B /* XCLocalSwiftPackageReference "Packages/CoreUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FD3016B82E2F87860049072F /* Products */;
@@ -466,6 +481,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		FD7B14F82EC6249A00705A1B /* XCLocalSwiftPackageReference "Packages/CoreUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/CoreUI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FD7B14F92EC6249A00705A1B /* CoreUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FD3016AF2E2F87860049072F /* Project object */;
 }

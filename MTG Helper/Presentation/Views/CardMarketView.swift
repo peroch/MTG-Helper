@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreUI
 
 /// Main CardMarket view with tabs for Spoilers and Search
 struct CardMarketView: View {

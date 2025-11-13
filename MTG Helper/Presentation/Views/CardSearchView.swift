@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreUI
 
 /// Vue affichant les résultats de recherche de cartes.
 /// Présente une liste de cartes avec leur nom et coût en mana.
